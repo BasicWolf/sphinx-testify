@@ -1,0 +1,4 @@
+
+extensions = [
+    'sphinx_testify'
+]

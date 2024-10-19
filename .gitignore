@@ -1,3 +1,11 @@
+test_result.xml
+
+
+
+#########################################
+### Python .gitignore added by Github ###
+#########################################
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
