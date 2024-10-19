@@ -1,1 +1,1 @@
-((nil . ((pyvenv-activate . "~/.virtualenvs/sphinx-testify/"))))
+((nil . ((pyvenv-activate . ".venv-sphinx-testify/"))))
