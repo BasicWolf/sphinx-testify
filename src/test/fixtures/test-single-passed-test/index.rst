@@ -3,4 +3,4 @@ Single Test
 
 
 .. testify::
-   a_test_name
+   asuite.aclass.test_only_adult_users_have_access

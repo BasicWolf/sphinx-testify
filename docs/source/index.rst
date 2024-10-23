@@ -15,23 +15,28 @@ whether the given unit tests succeeded and fails the documentation build
 otherwise.
 
 
-For example, a unit test verifies only the users of certain age can access the system.
+For example, a unit test verifies that only adults can access the system.
 The test results are available in JUnit XML format:
 
 .. code-block:: xml
 
-   <testcase
-       classname="test"
-       name="test_user_younger_than_18_cannot_log_in"/>
+   <?xml version="1.0" encoding="utf-8"?>
+   <testsuites>
+       <testsuite name="asuite">
+           <testcase classname="aclass"
+                     name="test_only_adult_users_have_access" />
+       </testsuite>
+   </testsuites>
 
 This behaviour is documented and testified as follows:
 
 .. code-block:: rest
 
-   Users under 18 are not allowed to log in.
+   Access to the system is restricted to adult users who are 18 years or older.
 
    .. testify::
-      test_user_younger_than_18_cannot_log_in
+      asuite.aclass.test_only_adult_users_have_access
+
 
 .. the test names are added to the document as target output comments (e.g. <!-- test_name --> in HTML)
 .. the :warn: setting does not fail the test build
