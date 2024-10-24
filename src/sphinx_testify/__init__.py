@@ -16,7 +16,7 @@ class TestifyDirective(SphinxDirective):
 
     def run(self) -> list[nodes.Node]:
         for test_name in self.content:
-            if test_name in self.env.testify_test_names:
+            if test_name in getattr(self.env, 'testify_test_names'):
                 self.env.app.emit('testify-testified', test_name)
 
         self._force_reread()
@@ -49,7 +49,7 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
 def _on_builder_inited(app: Sphinx):
     env = app.env
-    env.testify_test_names = _parse_tests_results_xml(app.config.testify_from)
+    setattr(env, 'testify_test_names', _parse_tests_results_xml(app.config.testify_from))
 
 
 def _parse_tests_results_xml(testify_from: list[str]) -> list[str]:

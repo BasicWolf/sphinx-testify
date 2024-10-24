@@ -5,7 +5,10 @@ all:
 	@echo '   make docs        generate documentation'
 
 
-build: test docs
+build: mypy test docs
+
+mypy:
+	MYPYPATH=src mypy -p sphinx_testify -p test
 
 test:
 	PYTHONPATH=src/:$(PYTHONPATH) pytest --junitxml=test_result.xml src/test/
