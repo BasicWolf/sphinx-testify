@@ -3,4 +3,4 @@ Single Test
 
 
 .. testify::
-   asuite.aclass.test_only_adult_users_have_access
+   testsuite.testclass.test_only_registered_users_have_access

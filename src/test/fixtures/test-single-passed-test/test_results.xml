@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testsuites>
-  <testsuite name="asuite">
-    <testcase classname="aclass" name="test_only_adult_users_have_access" />
+  <testsuite name="testsuite">
+    <testcase classname="testclass" name="test_only_registered_users_have_access" />
   </testsuite>
 </testsuites>
