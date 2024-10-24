@@ -33,7 +33,8 @@ def setup(app: Sphinx) -> ExtensionMetadata:
         default=[],
         rebuild='env',
         types=[list[str]],
-        description="""List of testing result files paths. The results should be in JUnit XML format"""
+        description=("List of testing result files paths."
+                     " The results should be in JUnit XML format""")
     )
     app.add_directive('testify', TestifyDirective)
     app.add_event('testify-testified')
@@ -48,8 +49,8 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
 
 def _on_builder_inited(app: Sphinx):
-    env = app.env
-    setattr(env, 'testify_test_names', _parse_tests_results_xml(app.config.testify_from))
+    test_results = _parse_tests_results_xml(app.config.testify_from)
+    setattr(app.env, 'testify_test_names', test_results)
 
 
 def _parse_tests_results_xml(testify_from: list[str]) -> list[str]:
@@ -64,5 +65,7 @@ def _parse_tests_results_xml(testify_from: list[str]) -> list[str]:
             for testcase_elem in testsuite_elem.iter('testcase'):
                 test_class_name = testcase_elem.get('classname')
                 test_name = testcase_elem.get('name')
-                test_names.append(f'{testsuite_name}.{test_class_name}.{test_name}')
+                test_names.append(
+                    f'{testsuite_name}.{test_class_name}.{test_name}'
+                )
     return test_names

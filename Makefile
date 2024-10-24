@@ -5,7 +5,10 @@ all:
 	@echo '   make docs        generate documentation'
 
 
-build: mypy test docs
+build: flake8 mypy test docs
+
+flake8:
+	flake8 src/
 
 mypy:
 	MYPYPATH=src mypy -p sphinx_testify -p test
