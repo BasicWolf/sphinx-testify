@@ -6,6 +6,9 @@ from sphinx.util.docutils import SphinxDirective
 from sphinx.util.logging import getLogger
 from sphinx.util.typing import ExtensionMetadata
 
+from .error import TestNotFoundError
+
+
 log = getLogger(__file__)
 
 
@@ -16,11 +19,17 @@ class TestifyDirective(SphinxDirective):
 
     def run(self) -> list[nodes.Node]:
         for test_name in self.content:
-            if test_name in getattr(self.env, 'testify_test_names'):
+            if test_name in self.tests:
                 self.env.app.emit('testify-testified', test_name)
+            else:
+                raise TestNotFoundError(test_name)
 
         self._force_reread()
         return []
+
+    @property
+    def tests(self) -> list[str]:
+        return getattr(self.env, 'testify_test_names', [])
 
     def _force_reread(self):
         env = self.state.document.settings.env
@@ -34,7 +43,7 @@ def setup(app: Sphinx) -> ExtensionMetadata:
         rebuild='env',
         types=[list[str]],
         description=("List of testing result files paths."
-                     " The results should be in JUnit XML format""")
+                     " The results should be in JUnit XML format")
     )
     app.add_directive('testify', TestifyDirective)
     app.add_event('testify-testified')

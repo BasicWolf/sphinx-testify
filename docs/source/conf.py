@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -23,6 +24,11 @@ author = 'Zaur Nasibov'
 extensions = [
     'sphinx_testify'
 ]
+
+testify_from = [
+    os.path.abspath(os.path.dirname(__file__) + '/../../test_results.xml')
+]
+
 
 templates_path = ['_templates']
 exclude_patterns = []

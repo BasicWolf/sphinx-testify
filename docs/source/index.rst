@@ -38,6 +38,14 @@ This behaviour is documented and testified as follows:
    .. testify::
       testsuite.testclass.test_only_registered_users_have_access
 
+.. testify::
+   pytest.tests.test_sphinx_testify.test_testify_single_passed_test_case
+
+Testify raises an error if the test was not found, e.g. it is mispelled
+or missing from the test results XML report.
+
+.. testify::
+   pytest.tests.test_sphinx_testify.test_raise_error_when_test_result_not_found
 
 .. the test names are added to the document as target output comments (e.g. <!-- test_name --> in HTML)
 .. the :warn: setting does not fail the test build
