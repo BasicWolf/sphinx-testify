@@ -1,6 +1,6 @@
 import pytest
 
-from test.conftest import TestifySphinxTestApp
+from .conftest import TestifySphinxTestApp
 
 
 @pytest.mark.sphinx('html', testroot='single-passed-test')
