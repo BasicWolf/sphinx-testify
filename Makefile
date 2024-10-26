@@ -1,11 +1,6 @@
 TEST_RESULTS_FILE=test_results.xml
 
-all:
-	@echo 'Usage:'
-	@echo '   make dev         make test and docs'
-	@echo '   make test        run unit and integration tests'
-	@echo '   make docs        generate documentation'
-
+all: build
 
 build: flake8 mypy test docs
 
@@ -25,4 +20,13 @@ clean:
 	$(MAKE) -C docs/ clean
 	rm $(TEST_RESULTS_FILE)
 
-.PHONY: src docs
+help:
+	@echo 'Usage:'
+	@echo '   make             run static checks, tests and build docs'
+	@echo '   make flake8      run flake8 style checker'
+	@echo '   make mypy        run mypy static type cheker'
+	@echo '   make test        run unit and integration tests'
+	@echo '   make docs        generate documentation'
+	@echo '   make clean       remove all build artifacts '
+
+.PHONY: docs
