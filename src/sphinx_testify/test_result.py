@@ -21,6 +21,9 @@ class TestResults:
     def __getitem__(self, test_name: str) -> TestResult:
         return self._results[test_name]
 
+    def __len__(self):
+        return len(self._results)
+
 
 @dataclass
 class TestResult:

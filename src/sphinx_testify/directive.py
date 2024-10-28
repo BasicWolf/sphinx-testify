@@ -1,5 +1,3 @@
-from xml.etree import ElementTree
-
 from docutils import nodes
 from sphinx.application import Sphinx
 from sphinx.util.docutils import SphinxDirective
@@ -7,7 +5,8 @@ from sphinx.util.logging import getLogger
 from sphinx.util.typing import ExtensionMetadata
 
 from .error import TestFailedError, TestNotFoundError
-from .test_result import TestFailure, TestResult, TestResults
+from .report_parser import parse_tests_results_xml
+from .test_result import TestResults
 
 
 log = getLogger(__file__)
@@ -64,36 +63,5 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
 
 def _on_builder_inited(app: Sphinx):
-    test_results = _parse_tests_results_xml(app.config.testify_from)
+    test_results = parse_tests_results_xml(app.config.testify_from)
     setattr(app.env, 'testify_test_results', test_results)
-
-
-def _parse_tests_results_xml(testify_from: list[str]) -> TestResults:
-    test_results = TestResults.empty()
-
-    for path in testify_from:
-        log.debug('Parsing Tests result from %s', path)
-        tree = ElementTree.parse(path)
-        root = tree.getroot()
-        for testsuite_elem in root.iter('testsuite'):
-            testsuite_name = testsuite_elem.get('name')
-            for testcase_elem in testsuite_elem.iter('testcase'):
-                test_class_name = testcase_elem.get('classname')
-                test_name = testcase_elem.get('name')
-
-                failures = [
-                    TestFailure(
-                        message=failure_elem.get('message', ''),
-                        type=failure_elem.get('type', '')
-                    )
-                    for failure_elem in testcase_elem.iterfind('failure')
-                ]
-
-                test_results.add(
-                    TestResult(
-                        name=f'{testsuite_name}.{test_class_name}.{test_name}',
-                        failures=failures
-                    )
-                )
-
-    return test_results
