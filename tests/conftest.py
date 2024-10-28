@@ -5,6 +5,8 @@ from pathlib import Path
 import pytest
 from sphinx.testing.util import SphinxTestApp
 
+from sphinx_testify.test_result import TestResult
+
 pytest_plugins = ('sphinx.testing.fixtures',)
 
 # Exclude 'fixtures' dirs for pytest test collector
@@ -31,8 +33,8 @@ class TestifySphinxTestApp:
         self._testified = []
         self._app.connect('testify-testified', self._on_testified)
 
-    def _on_testified(self, _app, test_name: str):
-        self._testified.append(test_name)
+    def _on_testified(self, _app, test_result: TestResult):
+        self._testified.append(test_result.name)
 
     def build(self):
         self._app.build(filenames=[str(self._app.srcdir / 'index.rst')])

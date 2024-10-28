@@ -1,9 +1,10 @@
 from .directive import TestifyDirective, setup
-from .error import TestNotFoundError
+from .error import TestFailedError, TestNotFoundError
 
 
 __all__ = [
     'TestifyDirective',
+    'TestFailedError',
     'TestNotFoundError',
     'setup'
 ]

@@ -6,7 +6,8 @@ from sphinx.util.docutils import SphinxDirective
 from sphinx.util.logging import getLogger
 from sphinx.util.typing import ExtensionMetadata
 
-from .error import TestNotFoundError
+from .error import TestFailedError, TestNotFoundError
+from .test_result import TestFailure, TestResult, TestResults
 
 
 log = getLogger(__file__)
@@ -19,17 +20,22 @@ class TestifyDirective(SphinxDirective):
 
     def run(self) -> list[nodes.Node]:
         for test_name in self.content:
-            if test_name in self.tests:
-                self.env.app.emit('testify-testified', test_name)
-            else:
+            try:
+                test_result = self.test_results[test_name]
+            except KeyError:
                 raise TestNotFoundError(test_name)
+
+            if len(test_result.failures) > 0:
+                raise TestFailedError(test_name)
+
+            self.env.app.emit('testify-testified', test_result)
 
         self._force_reread()
         return []
 
     @property
-    def tests(self) -> list[str]:
-        return getattr(self.env, 'testify_test_names', [])
+    def test_results(self) -> TestResults:
+        return getattr(self.env, 'testify_test_results', TestResults.empty())
 
     def _force_reread(self):
         env = self.state.document.settings.env
@@ -59,11 +65,11 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
 def _on_builder_inited(app: Sphinx):
     test_results = _parse_tests_results_xml(app.config.testify_from)
-    setattr(app.env, 'testify_test_names', test_results)
+    setattr(app.env, 'testify_test_results', test_results)
 
 
-def _parse_tests_results_xml(testify_from: list[str]) -> list[str]:
-    test_names = []
+def _parse_tests_results_xml(testify_from: list[str]) -> TestResults:
+    test_results = TestResults.empty()
 
     for path in testify_from:
         log.debug('Parsing Tests result from %s', path)
@@ -74,7 +80,20 @@ def _parse_tests_results_xml(testify_from: list[str]) -> list[str]:
             for testcase_elem in testsuite_elem.iter('testcase'):
                 test_class_name = testcase_elem.get('classname')
                 test_name = testcase_elem.get('name')
-                test_names.append(
-                    f'{testsuite_name}.{test_class_name}.{test_name}'
+
+                failures = [
+                    TestFailure(
+                        message=failure_elem.get('message', ''),
+                        type=failure_elem.get('type', '')
+                    )
+                    for failure_elem in testcase_elem.iterfind('failure')
+                ]
+
+                test_results.add(
+                    TestResult(
+                        name=f'{testsuite_name}.{test_class_name}.{test_name}',
+                        failures=failures
+                    )
                 )
-    return test_names
+
+    return test_results

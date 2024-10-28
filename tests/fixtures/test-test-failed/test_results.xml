@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="testsuite">
+    <testcase classname="testclass" name="a_test_which_should_have_passed">
+      <failure message="Assertion error message" type="AssertionError">
+        <!-- Call stack printed here -->
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>
