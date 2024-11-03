@@ -17,6 +17,13 @@ def test_parse_report_without_top_level_tag(path_to):
     assert test_results['testsuite.testclass.a_successful_test']
 
 
+def test_parse_nested_testsuites(path_to):
+    test_results = parse_tests_results_xml(
+        path_to('nested_testsuite_elements.xml')
+    )
+    assert len(test_results) == 8
+
+
 @pytest.fixture(scope='module')
 def path_to():
     fixtures_root = os.path.join(

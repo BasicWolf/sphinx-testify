@@ -18,7 +18,11 @@ def parse_tests_results_xml(testify_from: str | list[str]) -> TestResults:
         root = tree.getroot()
         for testsuite_elem in root.iter('testsuite'):
             testsuite_name = testsuite_elem.get('name')
-            for testcase_elem in testsuite_elem.iter('testcase'):
+
+            testcase_elements = (elem for elem in testsuite_elem
+                                 if elem.tag == 'testcase')
+
+            for testcase_elem in testcase_elements:
                 test_class_name = testcase_elem.get('classname')
                 test_name = testcase_elem.get('name')
 
