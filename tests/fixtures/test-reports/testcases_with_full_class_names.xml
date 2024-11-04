@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites time="15.682687">
+    <testsuite name="Tests.Registration" time="6.605871">
+        <testcase name="testCase1" classname="Tests.Registration" />
+    </testsuite>
+
+    <!-- Nested <testsuite> elements are possible, see
+     https://github.com/testmoapp/junitxml -->
+    <testsuite name="Tests.Authentication">
+        <testsuite name="Tests.Authentication.Login">
+            <testcase name="testCase2" classname="Tests.Authentication.Login" />
+        </testsuite>
+        <testcase name="testCase3" classname="Tests.Authentication" />
+    </testsuite>
+</testsuites>
