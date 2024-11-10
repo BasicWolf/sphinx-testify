@@ -16,17 +16,38 @@ test:
 docs:
 	$(MAKE) -C docs/ html
 
+dev-release: _require_running_from_github_actions
+	./script/update-dev-revision.sh pyproject.toml
+	git config user.name 'github-actions[bot]'
+	git config user.email 'github-actions[bot]@users.noreply.github.com'
+	git add .
+	git commit -m "Bump development version"
+	git push
+
+_require_running_from_github_actions:
+ifneq ($(GITHUB_ACTIONS),true)
+	@echo "Not running inside GitHub Actions."
+	@exit 1
+endif
+
 clean:
 	$(MAKE) -C docs/ clean
 	rm $(TEST_RESULTS_FILE)
 
+
+
 help:
 	@echo 'Usage:'
+	@echo ''
+	@echo '===DEVELOPMENT==='
 	@echo '   make             run static checks, tests and build docs'
 	@echo '   make flake8      run flake8 style checker'
 	@echo '   make mypy        run mypy static type cheker'
 	@echo '   make test        run unit and integration tests'
 	@echo '   make docs        generate documentation'
 	@echo '   make clean       remove all build artifacts '
+	@echo ''
+	@echo '===RELEASE==='
+	@echo '   make dev-release     builds the package, bumps development version and uploads to PyPI'
 
 .PHONY: docs
