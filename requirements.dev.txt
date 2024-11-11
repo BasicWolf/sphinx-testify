@@ -1,4 +1,4 @@
-build==1.2.2
+build==1.2.2.post1
 flake8==7.1.1
 mypy==1.13.0
 pytest==8.3.3
