@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  TWINE_PASSWORD: ${{ secrets.PYPI_API_KEY }}
+
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, 'ci:skip')"
@@ -26,5 +29,5 @@ jobs:
         run: make
 
       - name: "Release Development version"
-        if: "contains(github.event.head_commit.message, 'ci:release:dev')"
-        run: make dev-release
+        if: "contains(github.event.head_commit.message, 'ci:publish:dev')"
+        run: make release-dev

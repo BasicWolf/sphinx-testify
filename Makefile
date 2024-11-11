@@ -1,8 +1,6 @@
 TEST_RESULTS_FILE=test_results.xml
 
-all: build
-
-build: flake8 mypy test docs
+all: flake8 mypy test docs
 
 flake8:
 	flake8 src/
@@ -16,7 +14,9 @@ test:
 docs:
 	$(MAKE) -C docs/ html
 
-dev-release: _require_running_from_github_actions
+release-dev: update-dev-version build upload
+
+update-dev-version: _require_running_from_github_actions
 	./script/update-dev-revision.sh pyproject.toml
 	git config user.name 'github-actions[bot]'
 	git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -29,6 +29,13 @@ ifneq ($(GITHUB_ACTIONS),true)
 	@echo "Not running inside GitHub Actions."
 	@exit 1
 endif
+
+build:
+	python3 -m build
+
+upload:
+	python3 -m twine upload --repository testpypi dist/*
+
 
 clean:
 	$(MAKE) -C docs/ clean
