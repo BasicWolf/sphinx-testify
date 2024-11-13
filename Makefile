@@ -1,7 +1,7 @@
 BUILD_DIR=dist/
 TEST_RESULTS_FILE=test_results.xml
 
-all: flake8 mypy test docs
+all: flake8 mypy test docs build
 
 flake8:
 	flake8 src/
