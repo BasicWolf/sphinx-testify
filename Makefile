@@ -18,11 +18,9 @@ docs:
 ci-publish-dev: ci-bump-dev-version build ci-upload-dev
 
 ci-bump-dev-version: ci-require_running_from_github_actions
-	./script/update-dev-revision.sh pyproject.toml
 	git config user.name 'github-actions[bot]'
 	git config user.email 'github-actions[bot]@users.noreply.github.com'
-	git add .
-	git commit -m "Bump development version"
+	VERSION=$(shell ./script/update-dev-revision.sh pyproject.toml) && git commit -a -m "Bump development version to $$VERSION"
 	git push
 
 ci-require_running_from_github_actions:

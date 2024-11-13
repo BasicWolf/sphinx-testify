@@ -4,6 +4,7 @@
 # Usage function to display help
 usage() {
     echo "The script bumps a DEVELOPMENT version revision in the given pyproject.toml"
+    echo "and prints the updated version to stdout."
     echo ""
     echo "Usage: $0 <file>"
     echo " <file>  Path to an existing pyproject.toml file"
@@ -35,6 +36,9 @@ update_dev_version() {
     # print to stdout
     { print }' \
     "$1" # use the path passed to the script in the first argument
+
+    # print the updated version from pyproject.toml
+    awk -F' *= *' '/^version *=/ { gsub(/"/, "", $2); print $2 }' $1
 }
 
 validate_arguments() {
