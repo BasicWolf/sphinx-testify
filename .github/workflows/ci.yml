@@ -30,4 +30,4 @@ jobs:
 
       - name: "Release Development version"
         if: "contains(github.event.head_commit.message, 'ci:publish:dev')"
-        run: make release-dev
+        run: make ci-publish-dev

@@ -20,14 +20,14 @@ update_dev_version() {
     awk -i inplace '
     /version *= *".*dev[0-9]+"/ {
         # Extract major, minor, patch, and revision
-        match($0, /([0-9]+)\.([0-9]+)\.([0-9]+)dev([0-9]+)/, version)
+        match($0, /([0-9]+)\.([0-9]+)\.([0-9]+)\.dev([0-9]+)/, version)
         major = version[1]
         minor = version[2]
         patch = version[3]
         revision = version[4] + 1  # Increment the revision
 
         # Construct new version string
-        new_version = sprintf("version = \"%d.%d.%ddev%d\"", major, minor, patch, revision)
+        new_version = sprintf("version = \"%d.%d.%d.dev%d\"", major, minor, patch, revision)
 
         # Replace the line with the updated version
         sub(/version *= *".*"/, new_version)

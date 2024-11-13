@@ -1,3 +1,4 @@
+BUILD_DIR=dist/
 TEST_RESULTS_FILE=test_results.xml
 
 all: flake8 mypy test docs
@@ -14,9 +15,9 @@ test:
 docs:
 	$(MAKE) -C docs/ html
 
-release-dev: update-dev-version build upload
+ci-publish-dev: ci-bump-dev-version build ci-upload-dev
 
-update-dev-version: _require_running_from_github_actions
+ci-bump-dev-version: ci-require_running_from_github_actions
 	./script/update-dev-revision.sh pyproject.toml
 	git config user.name 'github-actions[bot]'
 	git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -24,7 +25,7 @@ update-dev-version: _require_running_from_github_actions
 	git commit -m "Bump development version"
 	git push
 
-_require_running_from_github_actions:
+ci-require_running_from_github_actions:
 ifneq ($(GITHUB_ACTIONS),true)
 	@echo "Not running inside GitHub Actions."
 	@exit 1
@@ -33,13 +34,13 @@ endif
 build:
 	python3 -m build
 
-upload:
+ci-upload-dev:
 	python3 -m twine upload --repository testpypi dist/*
 
 
 clean:
 	$(MAKE) -C docs/ clean
-	rm $(TEST_RESULTS_FILE)
+	rm $(BUILD_DIR) $(TEST_RESULTS_FILE)
 
 
 
