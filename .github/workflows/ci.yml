@@ -30,6 +30,7 @@ jobs:
         run: make
 
   publish-dev:
+    if: "contains(github.event.head_commit.message, 'ci:publish:dev')"
     needs: build
 
     runs-on: ubuntu-latest
@@ -48,7 +49,7 @@ jobs:
           python-version: "3.13"
 
       - name: "Install Dependencies"
-        run: pip install -r requirements.build.txt
+        run: pip install -r requirements.publish.txt
 
       - name: "Build and publish"
         run: make ci-release-dev
