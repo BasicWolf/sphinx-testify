@@ -36,9 +36,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: testpypi
 
-    permissions:
-      # IMPORTANT: this permission is mandatory for trusted publishing
-      id-token: write
+    # IMPORTANT: this permission is mandatory for trusted publishing
+    # Either enable it explicitly or allow Read & Write actions permissions
+    # in Project Settings
+    # permissions:
+    #   id-token: write
 
     steps:
       - uses: actions/checkout@v4
