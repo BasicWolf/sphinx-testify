@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  TWINE_PASSWORD: ${{ secrets.PYPI_API_KEY }}
-
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, 'ci:skip')"
@@ -35,6 +32,8 @@ jobs:
 
     runs-on: ubuntu-latest
     environment: testpypi
+    env:
+      TWINE_PASSWORD: ${{ secrets.TESTPYPI_SPHINX_TESTIFY_TOKEN }}
 
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
