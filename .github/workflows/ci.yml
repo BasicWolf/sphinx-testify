@@ -31,6 +31,8 @@ jobs:
 
   publish-dev:
     if: "contains(github.event.head_commit.message, 'ci:publish:dev')"
+    needs: build
+
     runs-on: ubuntu-latest
     environment: testpypi
 
