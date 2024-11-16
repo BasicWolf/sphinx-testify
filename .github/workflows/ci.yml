@@ -34,6 +34,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: testpypi
 
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -46,4 +50,9 @@ jobs:
         run: pip install -r requirements.build.txt
 
       - name: "Build and publish"
-        run: make ci-publish-dev
+        run: make ci-release-dev
+
+      - name: "Publish package distributions to PyPI"
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

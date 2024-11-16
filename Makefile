@@ -15,7 +15,7 @@ test:
 docs:
 	$(MAKE) -C docs/ html
 
-ci-publish-dev: ci-bump-dev-version build ci-upload-dev
+ci-release-dev: ci-bump-dev-version build
 
 ci-bump-dev-version: ci-require-running-from-github-actions
 	git config user.name 'github-actions[bot]'
@@ -31,10 +31,6 @@ endif
 
 build:
 	python3 -m build
-
-ci-upload-dev:
-	python3 -m twine upload --repository testpypi dist/*
-
 
 clean:
 	$(MAKE) -C docs/ clean
