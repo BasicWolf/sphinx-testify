@@ -1,8 +1,7 @@
-build==1.2.2.post1
+-r requirements.publish.txt
 flake8==7.1.1
 mypy==1.13.0
 pytest==8.3.3
 sphinx==8.1.3
 sphinx_testing==1.0.1
 types-docutils==0.21.0.20241005
-twine==5.1.1

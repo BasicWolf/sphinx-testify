@@ -21,6 +21,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+          cache: 'pip'
 
       - name: "Install Dependencies"
         run: pip install -r requirements.dev.txt
@@ -28,6 +29,33 @@ jobs:
       - name: "Build"
         run: make
 
-      - name: "Release Development version"
-        if: "contains(github.event.head_commit.message, 'ci:publish:dev')"
-        run: make ci-publish-dev
+  publish-dev:
+    if: "contains(github.event.head_commit.message, 'ci:publish:dev')"
+    needs: build
+
+    runs-on: ubuntu-latest
+    environment: testpypi
+
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Setup Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: 'pip'
+
+      - name: "Install Dependencies"
+        run: pip install -r requirements.publish.txt
+
+      - name: "Build and publish"
+        run: make ci-release-dev
+
+      - name: "Publish package distributions to PyPI"
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
