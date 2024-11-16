@@ -32,8 +32,6 @@ jobs:
 
     runs-on: ubuntu-latest
     environment: testpypi
-    env:
-      TWINE_PASSWORD: ${{ secrets.TESTPYPI_SPHINX_TESTIFY_TOKEN }}
 
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
