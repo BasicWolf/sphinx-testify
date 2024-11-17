@@ -14,7 +14,7 @@ sys.path.insert(0, str(
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'sphinx-testified'
+project = 'sphinx-testify'
 copyright = '2024, Zaur Nasibov'
 author = 'Zaur Nasibov'
 
