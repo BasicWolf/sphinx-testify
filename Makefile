@@ -1,7 +1,7 @@
 BUILD_DIR=dist/
 TEST_RESULTS_FILE=test_results.xml
 
-all: flake8 mypy test docs build
+all: flake8 mypy docs build
 
 flake8:
 	flake8 src/
@@ -12,7 +12,7 @@ mypy:
 test:
 	PYTHONPATH=.:src/:$(PYTHONPATH) pytest --junitxml=$(TEST_RESULTS_FILE) tests/
 
-docs:
+docs: test
 	$(MAKE) -C docs/ html
 
 ci-release-dev: ci-bump-dev-version build
