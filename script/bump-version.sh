@@ -12,7 +12,8 @@ usage() {
     echo "Major, minor or patch bump increments the requested version,"
     echo "and zeroes the following sub-versions."
     echo ""
-    echo "The script prints the updated version to stdout."
+    echo "The script updates pyproject.toml and prints the"
+    echo "updated version to stdout."
 }
 
 main() {
@@ -25,8 +26,9 @@ update_version() {
     local file="$2"
 
     # Extract the version line, increment revision, and replace it in the file
-    awk -i inplace -v version_type="$version_type" \
-    '/version *= *".*dev[0-9]+"/ {
+    #    awk -i inplace -v version_type="$version_type" \
+    awk -v version_type="$version_type" \
+    '/^version *= *"[0-9]+\.[0-9]+\.[0-9]+\.dev[0-9]+"$/ {
         # Extract major, minor, patch, and revision
         match($0, /([0-9]+)\.([0-9]+)\.([0-9]+)\.dev([0-9]+)/, version)
         major = version[1]
@@ -52,6 +54,36 @@ update_version() {
 
         # Construct new version string
         new_version = sprintf("version = \"%d.%d.%d.dev%d\"", major, minor, patch, revision)
+
+        # Replace the line with the updated version
+        sub(/version *= *".*"/, new_version)
+
+        # set found flag
+        found = 1
+    }
+    /^version *= *"[0-9]+\.[0-9]+\.[0-9]+"$/ {
+        # Extract major, minor, patch, and revision
+        match($0, /([0-9]+)\.([0-9]+)\.([0-9]+)/, version)
+        major = version[1]
+        minor = version[2]
+        patch = version[3]
+
+        if (version_type == "major") {
+            major++
+            minor = 0
+            patch = 0
+        } else if (version_type == "minor") {
+            minor++
+            patch = 0
+        } else if (version_type == "patch") {
+            patch++
+        } else if (version_type == "revision") {
+            printf "Cant bump missing revision on version %d.%d.%d\n", major, minor, patch > "/dev/stderr"
+            exit 1
+        }
+
+        # Construct new version string
+        new_version = sprintf("version = \"%d.%d.%d.dev0\"", major, minor, patch)
 
         # Replace the line with the updated version
         sub(/version *= *".*"/, new_version)
