@@ -15,27 +15,12 @@ test:
 docs: test
 	$(MAKE) -C docs/ html
 
-ci-release-dev: ci-bump-dev-version build
-
-ci-bump-dev-version: ci-require-running-from-github-actions
-	git config user.name 'github-actions[bot]'
-	git config user.email 'github-actions[bot]@users.noreply.github.com'
-	VERSION=$(shell ./script/bump-version.sh revision pyproject.toml) && git commit -a -m "Bump development version to $$VERSION"
-	git push
-
-ci-require-running-from-github-actions:
-ifneq ($(GITHUB_ACTIONS),true)
-	@echo "Not running inside GitHub Actions."
-	@exit 1
-endif
-
 build:
 	python3 -m build
 
 clean:
 	$(MAKE) -C docs/ clean
 	rm $(BUILD_DIR) $(TEST_RESULTS_FILE)
-
 
 
 help:

@@ -51,7 +51,13 @@ jobs:
         run: pip install -r requirements.publish.txt
 
       - name: "Build and publish"
-        run: make ci-release-dev
+        run: |
+          export VERSION=$(./script/bump-version.sh revision pyproject.toml)
+          make build
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -a -m "Bump development version to $VERSION"
+          git push
 
       - name: "Publish package distributions to PyPI"
         uses: pypa/gh-action-pypi-publish@release/v1
