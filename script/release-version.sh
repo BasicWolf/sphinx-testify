@@ -19,8 +19,7 @@ release_version() {
     local file="$1"
 
     # Extract the version line, increment revision, and replace it in the file
-#    awk -i inplace \
-    awk \
+    awk -i inplace \
     '/version *= *".*dev[0-9]+"/ {
         # Extract major, minor, patch, and revision
         match($0, /([0-9]+\.[0-9]+\.[0-9]+)\.dev[0-9]+/, version)

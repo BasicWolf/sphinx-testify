@@ -26,8 +26,7 @@ update_version() {
     local file="$2"
 
     # Extract the version line, increment revision, and replace it in the file
-    #    awk -i inplace -v version_type="$version_type" \
-    awk -v version_type="$version_type" \
+    awk -i inplace -v version_type="$version_type" \
     '/^version *= *"[0-9]+\.[0-9]+\.[0-9]+\.dev[0-9]+"$/ {
         # Extract major, minor, patch, and revision
         match($0, /([0-9]+)\.([0-9]+)\.([0-9]+)\.dev([0-9]+)/, version)
