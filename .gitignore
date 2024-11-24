@@ -1,6 +1,8 @@
 /test_results.xml
 .venv*
 
+# my local development todo
+/todo.md
 
 #########################################
 ### Python .gitignore added by Github ###
