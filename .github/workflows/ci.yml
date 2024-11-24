@@ -34,9 +34,8 @@ jobs:
     environment: testpypi
 
     permissions:
-      # IMPORTANT: this permission is mandatory for trusted publishing
-      id-token: write
-      contents: write
+      id-token: write  # mandatory for trusted publishing in pypi
+      contents: write  # allows committing to the repository
 
     steps:
       - uses: actions/checkout@v4
