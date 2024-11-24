@@ -1,3 +1,6 @@
+.. role:: code-py(code)
+   :language: Python
+
 Sphinx Testify
 ##############
 
@@ -107,3 +110,26 @@ The parser is also tolerant for missing attribute, such as
 
 .. the test names are added to the document as target output comments (e.g. <!-- test_name --> in HTML)
 .. the :warn: setting does not fail the test build
+
+
+Configuration
+=============
+
+.. confval:: testify-skip
+   :type: :code-py:`bool`
+   :default: :code-py:`False`
+
+   Completely skip verifying testified sources. This is useful in environments
+   where you are building documentation, but running tests is not feasible.
+
+   For example, you can run tests and build documentation in CI to testify it,
+   and skip tests and testifying in ReadTheDocs builder.
+
+   Example:
+
+   .. code-block:: python
+
+      testify_skip = os.environ.get('READTHEDOCS') == 'True'
+
+.. testify::
+   pytest.tests.test_sphinx_testify.test_skip_testifying

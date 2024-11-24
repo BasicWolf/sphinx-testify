@@ -45,3 +45,6 @@ class TestifySphinxTestApp:
 
     def has_testified(self, test_name) -> bool:
         return test_name in self._testified
+
+    def did_not_testify(self) -> bool:
+        return self._testified == []

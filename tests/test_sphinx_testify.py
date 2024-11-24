@@ -33,3 +33,9 @@ def test_raise_error_when_test_failed(test_app: TestifySphinxTestApp):
         match='Test failed: "testsuite.testclass.a_test_which_should_have_passed"'
     ):
         test_app.build()
+
+
+@pytest.mark.sphinx('html', testroot='skip-testify')
+def test_skip_testifying(test_app: TestifySphinxTestApp):
+    test_app.build()
+    assert test_app.did_not_testify()

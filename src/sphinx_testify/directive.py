@@ -22,6 +22,9 @@ class TestifyDirective(SphinxDirective):
     has_content = True
 
     def run(self) -> list[nodes.Node]:
+        if self.testify_skip:
+            return []
+
         for test_name in self.content:
             try:
                 test_result = self.test_results[test_name]
@@ -40,6 +43,10 @@ class TestifyDirective(SphinxDirective):
     def test_results(self) -> TestResults:
         return getattr(self.env, 'testify_test_results', TestResults.empty())
 
+    @property
+    def testify_skip(self) -> bool:
+        return self.env.config.testify_skip
+
     def _force_reread(self):
         env = self.state.document.settings.env
         env.note_reread()
@@ -51,9 +58,21 @@ def setup(app: Sphinx) -> ExtensionMetadata:
         default=[],
         rebuild='env',
         types=[list[str]],
-        description=("List of testing result files paths."
-                     " The results should be in JUnit XML format")
+        description=("List of testing result files paths. "
+                     "The results should be in JUnit XML format")
     )
+    app.add_config_value(
+        'testify_skip',
+        default=False,
+        rebuild='env',
+        types=[bool],
+        description=(
+            "Completely skip testifying. This can be used to avoid "
+            "testifying in environments that can not run tests before "
+            "building the output document."
+        )
+    )
+
     app.add_directive('testify', TestifyDirective)
     app.add_event('testify-testified')
 
@@ -67,5 +86,9 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
 
 def _on_builder_inited(app: Sphinx):
+    if app.config.testify_skip:
+        log.info("I will skip testifying documentation")
+        return
+
     test_results = parse_tests_results_xml(app.config.testify_from)
     setattr(app.env, 'testify_test_results', test_results)
