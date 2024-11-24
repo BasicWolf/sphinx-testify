@@ -18,7 +18,7 @@ main() {
 release_version() {
     local file="$1"
 
-    # Extract the version line, increment revision, and replace it in the file
+    # Extract the version line, remove .devXX suffix and write new version to the file
     awk -i inplace \
     '/version *= *".*dev[0-9]+"/ {
         # Extract major, minor, patch, and revision
