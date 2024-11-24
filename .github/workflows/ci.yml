@@ -62,3 +62,51 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+
+
+  publish-release:
+    if: "contains(github.event.head_commit.message, 'ci:publish:release')"
+    needs: build
+
+    runs-on: ubuntu-latest
+    environment: testpypi
+
+    permissions:
+      id-token: write  # mandatory for trusted publishing in pypi
+      contents: write  # allows committing to the repository
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Setup Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: 'pip'
+
+      - name: "Install Dependencies"
+        run: pip install -r requirements.publish.txt
+
+      - name: "Build package and bump version"
+        run: |
+          export VERSION=$(./script/release-version.sh pyproject.toml)
+          make build
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -a -m "Release version $VERSION"
+          git tag $VERSION
+          git push
+          git push --tags
+
+      - name: "Publish package distributions to PyPI"
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+      - name: "Bump to the next minor development version"
+        run: |
+          export VERSION=$(./script/bump-version.sh minor pyproject.toml)
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -a -m "Bump to the next minor development version $VERSION"
+          git push
