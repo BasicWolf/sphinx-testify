@@ -1,6 +1,6 @@
 [project]
 name = "sphinx-testify"
-version = "0.0.2"
+version = "0.1.0.dev0"
 description = "A Sphinx directive which enables testifying documentation by explicitly referencing test results"
 readme = "README.md"
 authors = [
