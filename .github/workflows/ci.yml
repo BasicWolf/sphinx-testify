@@ -103,10 +103,10 @@ jobs:
         with:
           repository-url: https://test.pypi.org/legacy/
 
-      - name: "Bump to the next minor development version"
+      - name: "Bump to the next patch development version"
         run: |
-          export VERSION=$(./script/bump-version.sh minor pyproject.toml)
+          export VERSION=$(./script/bump-version.sh patch pyproject.toml)
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git commit -a -m "Bump to the next minor development version $VERSION"
+          git commit -a -m "Bump to the next patch development version $VERSION"
           git push
