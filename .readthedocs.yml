@@ -6,8 +6,6 @@ version: "2"
 python:
   install:
     - requirements: docs/requirements.txt
-    - method: pip
-      path: .
 
 build:
   os: "ubuntu-24.04"
