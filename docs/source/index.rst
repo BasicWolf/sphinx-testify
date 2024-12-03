@@ -48,12 +48,14 @@ To enable ``sphinx-testify``, add it to the list of extensions in Sphinx project
    ]
 
 
+Usage
+=====
+
 ``Testify`` provides a Sphinx directive, which verifies
 whether the given unit tests succeeded and fails the documentation build
 otherwise.
 
-
-For example, a unit test verifies that only registered users
+For example, consider a test which verifies that only registered users
 can access the system.
 The test results are available in JUnit XML format:
 
@@ -67,7 +69,7 @@ The test results are available in JUnit XML format:
        </testsuite>
    </testsuites>
 
-This behaviour is documented and testified as follows:
+You document and testify this behaviour via Sphinx as follows:
 
 .. code-block:: rest
 
@@ -79,8 +81,9 @@ This behaviour is documented and testified as follows:
 .. testify::
    pytest.tests.test_sphinx_testify.test_testify_single_passed_test_case
 
-Testify will raise an error if the specified test failed or was not found in
-the test results XML report.
+The directive is not rendered and does not affect the output HTML in any way.
+However, documentation build fails if the specified test failed or
+is missing from the test results XML report.
 
 .. testify::
    pytest.tests.test_sphinx_testify.test_raise_error_when_test_result_not_found
