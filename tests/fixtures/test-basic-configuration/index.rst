@@ -1,0 +1,2 @@
+Test basic configuration
+########################

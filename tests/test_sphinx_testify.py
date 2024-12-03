@@ -8,6 +8,11 @@ from sphinx_testify import TestNotFoundError, TestFailedError
 from .conftest import TestifySphinxTestApp
 
 
+@pytest.mark.sphinx('html', testroot='basic-configuration')
+def test_basic_configuration(test_app: TestifySphinxTestApp):
+    test_app.build()
+
+
 @pytest.mark.sphinx('html', testroot='single-passed-test')
 def test_testify_single_passed_test_case(test_app: TestifySphinxTestApp):
     test_app.build()

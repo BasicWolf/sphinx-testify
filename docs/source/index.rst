@@ -4,13 +4,48 @@
 Sphinx Testify
 ##############
 
-``Testify`` is an extension to Sphinx which enables
-writing `TODO: testified documentation <http://example.com>`_.
+``sphinx-testify`` is an extension to Sphinx which allows
+testifying documentation: ensuring that it is also up-to-date an
+aligned with the library or application capabilities.
+
+`TODO: testified documentation <http://example.com>`_.
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+Installation
+============
+
+We support Python version TODO and newer.
+However, we support only the latest versions of Sphinx.
+
+To install, run
+
+.. code-block:: shell
+
+   pip install sphinx-testify
+
+Basic configuration
+===================
+
+.. testify::
+
+   pytest.tests.test_sphinx_testify.test_basic_configuration
+
+To enable ``sphinx-testify``, add it to the list of extensions in Sphinx project
+``conf.py`` and add a path to jUnit XML -formatted tests result file. For example:
+
+.. code-block:: python
+
+   extensions = [
+       'sphinx_testify'
+   ]
+
+   testify_from = [
+       '/path/to/test_results.xml'
+   ]
 
 
 ``Testify`` provides a Sphinx directive, which verifies

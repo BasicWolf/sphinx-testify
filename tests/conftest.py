@@ -4,12 +4,16 @@
 
 from __future__ import annotations
 
+import logging
+
 from pathlib import Path
 
 import pytest
 from sphinx.testing.util import SphinxTestApp
-
+from sphinx.errors import ExtensionError
 from sphinx_testify.test_result import TestResult
+
+log = logging.getLogger(__file__)
 
 pytest_plugins = ('sphinx.testing.fixtures',)
 
@@ -35,7 +39,13 @@ class TestifySphinxTestApp:
     def __init__(self, app: SphinxTestApp):
         self._app = app
         self._testified = []
-        self._app.connect('testify-testified', self._on_testified)
+        try:
+            self._app.connect('testify-testified', self._on_testified)
+        except ExtensionError:
+            log.warning(
+                "Unable to listen to `testify-testified` event. "
+                "NOTE: This might be intentional."
+            )
 
     def _on_testified(self, _app, test_result: TestResult):
         self._testified.append(test_result.name)
