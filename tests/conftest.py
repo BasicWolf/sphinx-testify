@@ -9,6 +9,7 @@ import logging
 from pathlib import Path
 
 import pytest
+from sphinx.config import Config
 from sphinx.testing.util import SphinxTestApp
 from sphinx.errors import ExtensionError
 from sphinx_testify.test_result import TestResult
@@ -58,3 +59,7 @@ class TestifySphinxTestApp:
 
     def did_not_testify(self) -> bool:
         return self._testified == set()
+
+    @property
+    def config(self) -> Config:
+        return self._app.config

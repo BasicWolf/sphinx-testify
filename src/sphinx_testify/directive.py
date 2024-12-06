@@ -90,5 +90,8 @@ def _on_builder_inited(app: Sphinx):
         log.info("I will skip testifying documentation")
         return
 
+    if not app.config.testify_from:
+        log.warning("`testify_from` configuration parameter is not set or empty.")
+
     test_results = parse_tests_results_xml(app.config.testify_from)
     setattr(app.env, 'testify_test_results', test_results)

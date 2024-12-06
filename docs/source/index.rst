@@ -155,6 +155,7 @@ Configuration
 
 .. confval:: testify_from
    :type: :code-py:`list[str]`
+   :default: :code-py:`[]`
 
    The list of paths to test reports in JUnit XML format.
 

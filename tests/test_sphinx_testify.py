@@ -1,7 +1,6 @@
 # Copyright: (c) 2024, Zaur Nasibov <zaur@zaurnasibov.com>
 # GNU General Public License v3.0+
 # See COPYING or https://www.gnu.org/licenses/gpl-3.0.txt
-
 import pytest
 
 from sphinx_testify import TestNotFoundError, TestFailedError
@@ -53,3 +52,11 @@ def test_testify_from_many_sources(test_app: TestifySphinxTestApp):
         'a_testsuite.a_testclass.a_test',
         'another_testsuite.another_testclass.another_test'
     )
+
+
+@pytest.mark.sphinx('html', testroot='configuration-testify-from-parameter-missing')
+def test_pass_when_testify_from_config_parameter_is_missing(
+    test_app: TestifySphinxTestApp,
+):
+    test_app.build()
+    assert test_app.config.testify_from == []
