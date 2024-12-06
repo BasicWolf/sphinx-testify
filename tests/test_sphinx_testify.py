@@ -44,3 +44,12 @@ def test_raise_error_when_test_failed(test_app: TestifySphinxTestApp):
 def test_skip_testifying(test_app: TestifySphinxTestApp):
     test_app.build()
     assert test_app.did_not_testify()
+
+
+@pytest.mark.sphinx('html', testroot='many-sources')
+def test_testify_from_many_sources(test_app: TestifySphinxTestApp):
+    test_app.build()
+    assert test_app.has_testified(
+        'a_testsuite.a_testclass.a_test',
+        'another_testsuite.another_testclass.another_test'
+    )

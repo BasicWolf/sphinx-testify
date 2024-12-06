@@ -34,11 +34,11 @@ def test_app(app: SphinxTestApp) -> TestifySphinxTestApp:
 class TestifySphinxTestApp:
     __test__ = False
     _app: SphinxTestApp
-    _testified: list[str]
+    _testified: set[str]
 
     def __init__(self, app: SphinxTestApp):
         self._app = app
-        self._testified = []
+        self._testified = set()
         try:
             self._app.connect('testify-testified', self._on_testified)
         except ExtensionError:
@@ -48,13 +48,13 @@ class TestifySphinxTestApp:
             )
 
     def _on_testified(self, _app, test_result: TestResult):
-        self._testified.append(test_result.name)
+        self._testified.add(test_result.name)
 
     def build(self):
         self._app.build(filenames=[str(self._app.srcdir / 'index.rst')])
 
-    def has_testified(self, test_name) -> bool:
-        return test_name in self._testified
+    def has_testified(self, *test_names: str) -> bool:
+        return bool(set(test_names) & self._testified)
 
     def did_not_testify(self) -> bool:
-        return self._testified == []
+        return self._testified == set()

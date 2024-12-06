@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="a_testsuite">
+    <testcase classname="a_testclass" name="a_test" />
+  </testsuite>
+</testsuites>

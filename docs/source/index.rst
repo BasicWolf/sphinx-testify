@@ -153,6 +153,15 @@ The parser is also tolerant for missing attributes, such as
 Configuration
 =============
 
+.. confval:: testify_from
+   :type: :code-py:`list[str]`
+
+   The list of paths to test reports in JUnit XML format.
+
+   .. testify::
+      pytest.tests.test_sphinx_testify.test_testify_from_many_sources
+
+
 .. confval:: testify_skip
    :type: :code-py:`bool`
    :default: :code-py:`False`
