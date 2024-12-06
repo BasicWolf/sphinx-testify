@@ -153,7 +153,7 @@ The parser is also tolerant for missing attribute, such as
 Configuration
 =============
 
-.. confval:: testify-skip
+.. confval:: testify_skip
    :type: :code-py:`bool`
    :default: :code-py:`False`
 
