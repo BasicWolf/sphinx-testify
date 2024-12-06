@@ -4,7 +4,7 @@
 Sphinx Testify
 ##############
 
-``sphinx-testify`` is an extension to Sphinx which allows
+``sphinx-testify`` is an extension to Sphinx that allows
 testifying documentation: ensuring that it is also up-to-date an
 aligned with the library or application capabilities.
 
@@ -52,7 +52,7 @@ Usage
 =====
 
 ``Testify`` provides a Sphinx directive, which verifies
-whether the given unit tests succeeded and fails the documentation build
+whether the given test succeeded and fails the documentation build
 otherwise.
 
 For example, consider a test which verifies that only registered users
@@ -137,7 +137,7 @@ it is enough to specify
 .. testify::
    pytest.tests.test_report_parser.test_normalize_testcase_names
 
-The parser is also tolerant for missing attribute, such as
+The parser is also tolerant for missing attributes, such as
 ``name`` attribute in ``<testsuite>`` or ``classname`` attribute in
 ``<testcase>``. However, testify raises an error if ``<testcase>`` is missing
 ``name`` attribute.
