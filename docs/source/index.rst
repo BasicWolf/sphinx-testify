@@ -35,7 +35,7 @@ Basic configuration
    pytest.tests.test_sphinx_testify.test_basic_configuration
 
 To enable ``sphinx-testify``, add it to the list of extensions in Sphinx project
-``conf.py`` and add a path to jUnit XML -formatted tests result file. For example:
+``conf.py`` and add a path to JUnit XML -formatted tests result file. For example:
 
 .. code-block:: python
 
@@ -93,7 +93,7 @@ is missing from the test results XML report.
 Test report parser
 ==================
 
-The test report parser module consumes JUnit-XML -formatted reports.
+The test report parser module consumes JUnit XML -formatted reports.
 It aims at parsing the most common output and ignore all the unnecessary
 data.
 
@@ -146,18 +146,16 @@ The parser is also tolerant for missing attributes, such as
    pytest.tests.test_report_parser.test_raise_if_testcase_name_is_missing
    pytest.tests.test_report_parser.test_parse_with_missing_testsuite_name_and_testcase_classname
 
-.. the test names are added to the document as target output comments (e.g. <!-- test_name --> in HTML)
-.. the :warn: setting does not fail the test build
 
-
-Configuration
-=============
+Configuration parameters
+========================
 
 .. confval:: testify_from
    :type: :code-py:`list[str]`
    :default: :code-py:`[]`
 
-   The list of paths to test reports in JUnit XML format.
+   The list of paths to test report files. The list should contain at least
+   one entry.
 
    .. testify::
       pytest.tests.test_sphinx_testify.test_testify_from_many_sources
