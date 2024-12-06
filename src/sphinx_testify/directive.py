@@ -87,7 +87,10 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
 def _on_builder_inited(app: Sphinx):
     if app.config.testify_skip:
-        log.info("I will skip testifying documentation")
+        log.info(
+            "I will skip testifying documentation: "
+            "testify_skip configuration parameter is True"
+        )
         return
 
     if not app.config.testify_from:
