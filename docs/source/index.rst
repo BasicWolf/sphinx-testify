@@ -14,6 +14,10 @@ aligned with the library or application capabilities.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :hidden:
+
+   self
+   testified-documentation
 
 Installation
 ============
@@ -177,5 +181,5 @@ Configuration parameters
 
       testify_skip = os.environ.get('READTHEDOCS') == 'True'
 
-.. testify::
-   pytest.tests.test_sphinx_testify.test_skip_testifying
+   .. testify::
+      pytest.tests.test_sphinx_testify.test_skip_testifying
