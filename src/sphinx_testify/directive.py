@@ -2,6 +2,7 @@
 # GNU General Public License v3.0+
 # See COPYING or https://www.gnu.org/licenses/gpl-3.0.txt
 
+from typing import LiteralString
 from docutils import nodes
 from sphinx.application import Sphinx
 from sphinx.util.docutils import SphinxDirective
@@ -17,7 +18,20 @@ log = getLogger(__file__)
 
 
 class TestifyDirective(SphinxDirective):
-    """TODO"""
+    """Directive to testify documentation.
+
+    The body of the directive are test names separated by newline.
+    The test names correlate to their names in a JUnit-formatted
+    testing report.
+
+    For example:
+
+    .. testify::
+       pytest.tests.test_sphinx_testify.test_raise_error_when_test_result_not_found
+       pytest.tests.test_sphinx_testify.test_raise_error_when_test_failed
+    """
+
+    DIRECTIVE_NAME: LiteralString = "testify"
 
     has_content = True
 
@@ -73,7 +87,7 @@ def setup(app: Sphinx) -> ExtensionMetadata:
         )
     )
 
-    app.add_directive('testify', TestifyDirective)
+    app.add_directive(TestifyDirective.DIRECTIVE_NAME, TestifyDirective)
     app.add_event('testify-testified')
 
     app.connect('builder-inited', _on_builder_inited)
