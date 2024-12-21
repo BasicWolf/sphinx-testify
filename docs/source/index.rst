@@ -28,7 +28,7 @@ To install, run
    pip install sphinx-testify
 
 
-Or get it from the source at https://github.com/BasicWolf/sphinx-testify
+Or get it from the source at https://github.com/basicwolf/sphinx-testify
 
 Basic configuration
 ===================
@@ -98,7 +98,7 @@ A full example
 
 Sphinx-testify does what it preaches: this very documentation is testified!
 You can find out more by reading the
-`source code <https://github.com/BasicWolf/sphinx-testify/blob/master/docs/source/index.rst?plain=1>`_.
+`source code <https://github.com/basicwolf/sphinx-testify/blob/master/docs/source/index.rst?plain=1>`_.
 
 
 Test report parser
