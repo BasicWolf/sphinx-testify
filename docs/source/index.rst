@@ -156,13 +156,13 @@ Configuration parameters
 
 .. confval:: testify_from
    :type: :code-py:`list[str]`
-   :default: :code-py:`[]`
 
    The list of paths to test report files. The list should contain at least
    one entry.
 
    .. testify::
       pytest.tests.test_sphinx_testify.test_testify_from_many_sources
+      pytest.tests.test_sphinx_testify.test_pass_when_testify_from_config_parameter_is_missing
 
 
 .. confval:: testify_skip
