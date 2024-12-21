@@ -21,9 +21,6 @@ library or application capabilities.
 Installation
 ============
 
-We support Python version TODO and newer.
-However, we support only the latest versions of Sphinx.
-
 To install, run
 
 .. code-block:: shell
