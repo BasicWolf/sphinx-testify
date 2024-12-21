@@ -27,6 +27,9 @@ To install, run
 
    pip install sphinx-testify
 
+
+Or get it from the source at https://github.com/BasicWolf/sphinx-testify
+
 Basic configuration
 ===================
 
@@ -51,7 +54,7 @@ To enable ``sphinx-testify``, add it to the list of extensions in Sphinx project
 Usage
 =====
 
-``Testify`` provides a Sphinx directive, which verifies
+``Sphinx-testify`` provides a Sphinx directive, which verifies
 whether the given test succeeded and fails the documentation build
 otherwise.
 
@@ -88,6 +91,14 @@ is missing from the test results XML report.
 .. testify::
    pytest.tests.test_sphinx_testify.test_raise_error_when_test_result_not_found
    pytest.tests.test_sphinx_testify.test_raise_error_when_test_failed
+
+
+A full example
+--------------
+
+Sphinx-testify does what it preaches: this very documentation is testified!
+You can find out more by reading the
+`source code <https://github.com/BasicWolf/sphinx-testify/blob/master/docs/source/index.rst?plain=1>`_.
 
 
 Test report parser
