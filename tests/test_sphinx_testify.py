@@ -25,7 +25,12 @@ def test_testify_single_passed_test_case(test_app: TestifySphinxTestApp):
 def test_raise_error_when_test_result_not_found(test_app: TestifySphinxTestApp):
     with pytest.raises(
         TestNotFoundError,
-        match='Could not find test "test_name_which_is_not_in_test_results"'
+        match=(
+            'Could not testify with "test_name_which_is_not_in_test_results" - '
+            'I didn\'t find it among test results.\\n'
+            'It could be a typo in test name, or test hierarchy names '
+            r'\(modules, classes etc.\).'
+        )
     ):
         test_app.build()
 

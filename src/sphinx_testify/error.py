@@ -28,5 +28,8 @@ class TestNotFoundError(SphinxError):
 
     def __init__(self, test_name: str):
         super().__init__(
-            f"Could not find test \"{test_name}\""
+            f"Could not testify with \"{test_name}\" - "
+            "I didn't find it among test results.\n"
+            "It could be a typo in test name, or test hierarchy names "
+            "(modules, classes etc.)."
         )
