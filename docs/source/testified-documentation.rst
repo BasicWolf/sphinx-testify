@@ -1,3 +1,5 @@
+.. _testified-documentation:
+
 Testified Documentation
 #######################
 

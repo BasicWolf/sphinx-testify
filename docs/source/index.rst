@@ -5,10 +5,9 @@ Sphinx Testify
 ##############
 
 ``sphinx-testify`` is an extension to Sphinx that allows
-testifying documentation: ensuring that it is also up-to-date an
-aligned with the library or application capabilities.
-
-`TODO: testified documentation <http://example.com>`_.
+:ref:`testifying documentation <testified-documentation>`:
+ensuring that the documentation is up-to-date an aligned with the
+library or application capabilities.
 
 
 .. toctree::
