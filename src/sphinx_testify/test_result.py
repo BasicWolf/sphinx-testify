@@ -36,6 +36,9 @@ class TestResult:
     name: str
     failures: list[TestFailure]
 
+    def has_failed(self) -> bool:
+        return len(self.failures) > 0
+
 
 @dataclass
 class TestFailure:

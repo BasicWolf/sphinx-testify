@@ -45,7 +45,7 @@ class TestifyDirective(SphinxDirective):
             except KeyError:
                 raise TestNotFoundError(test_name)
 
-            if len(test_result.failures) > 0:
+            if test_result.has_failed():
                 raise TestFailedError(test_name)
 
             self.env.app.emit('testify-testified', test_result)
