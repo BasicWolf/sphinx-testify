@@ -49,7 +49,7 @@ jobs:
       - name: "Install Dependencies"
         run: pip install -r requirements.publish.txt
 
-      - name: "Build and publish"
+      - name: "Build dev revision version and publish to PyPI"
         run: |
           export VERSION=$(./script/bump-version.sh revision pyproject.toml)
           make build
