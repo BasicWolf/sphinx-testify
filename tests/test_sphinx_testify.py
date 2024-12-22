@@ -29,7 +29,7 @@ def test_raise_error_when_test_result_not_found(test_app: TestifySphinxTestApp):
             'Could not testify with "test_name_which_is_not_in_test_results" - '
             'I didn\'t find it among test results.\\n'
             'It could be a typo in test name, or test hierarchy names '
-            r'\(modules, classes etc.\).'
+            '\\(modules, classes etc.\\).'
         )
     ):
         test_app.build()
