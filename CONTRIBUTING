@@ -1,3 +1,5 @@
+# Contributing
+
 Thank you for your interest in pushing Sphinx-testify boundaries further!
 Contributions are very much welcome.
 
@@ -13,3 +15,16 @@ which means that:
 * And the documentation is testified.
 
 Looking forward to collaborating with you!
+
+
+### Building locally
+
+1. Create a virtual environment, e.g by
+   ```python -m venv .venv```
+2. Activate the virtual environment:
+   ```source .venv/bin/activate```
+3. Install the development-time requirements:
+   ```pip install -r requirements.dev.txt```
+4. Run the static checks, tests, build the testified documentation
+   and the distribution package:
+   ```make all```
