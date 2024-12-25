@@ -1,5 +1,8 @@
+/.projectile
+/.dir-locals.el
 /test_results.xml
 .venv*
+
 
 # my local development todo
 /todo.md
