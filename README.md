@@ -43,6 +43,13 @@ Here's how it looks like in a reStructuredText document:
       test_system_returns_authentication_failed_error_when_password_is_wrong
 ```
 
+## A full example
+
+You practice what you preach. It would be hypocritical to develop sphinx-testify
+in a way different from what is described above.
+What it means is that the documentation to the library is testified!
+Everything you need for a real-world example is in the same repository.
+
 ## Installation
 
 ```shell
