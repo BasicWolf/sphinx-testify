@@ -75,14 +75,13 @@ Rinse and repeat, until the specification is fully documented and testified.
 
 .. image:: img/testified-documentation.svg
 
-
 Why not ...?
 ============
 
 Cucumber
 --------
 
-Over the years of using cucumber, I failed to have
+Over the years of using Cucumber, I failed to have
 a living documentation as an outcome.
 Cucumber is a fantastic tool for collaboration and building shared understanding
 from examples. It's a miracle what a group of business people, developers,
