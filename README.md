@@ -6,7 +6,7 @@ sphinx-testify is an extension to the Sphinx documentation generator,
 that enables building [testified documentation][] and, ultimately
 [living documentation][].
 
-[testified documentation]: https://www.zaurnasibov.com/posts/2024/09/29/testified-documentation.html#testified-documentation
+[testified documentation]: https://sphinx-testify.readthedocs.io/en/latest/testified-documentation.html
 [living documentation]: https://gojko.net/books/specification-by-example/
 
 ## Testified documentation in a nutshell
