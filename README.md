@@ -33,7 +33,7 @@ Here's how it looks like in a reStructuredText document:
    System access
    =============
 
-   Only a user with valid credentials: a username and a password can access
+   Users with valid credentials: a username and a password can access
    the system. If credentials are wrong, the system returns "Authentication failed"
    error message.
 
@@ -47,8 +47,8 @@ Here's how it looks like in a reStructuredText document:
 
 You practice what you preach. It would be hypocritical to develop sphinx-testify
 in a way different from what is described above.
-What it means is that the documentation to the library is testified!
-Everything you need for a real-world example is in the same repository.
+In short, the documentation to the library itself is testified!
+Everything you need for a real-world example is here, in the repository :)
 
 ## Installation
 
