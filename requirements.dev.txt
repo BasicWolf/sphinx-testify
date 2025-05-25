@@ -4,4 +4,4 @@ mypy==1.15.0
 pytest==8.3.5
 sphinx==8.2.3
 sphinx_testing==1.0.1
-types-docutils==0.21.0.20250523
+types-docutils==0.21.0.20250525
