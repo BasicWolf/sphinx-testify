@@ -1,6 +1,6 @@
 -r requirements.publish.txt
 flake8==7.2.0
-mypy==1.15.0
+mypy==1.16.0
 pytest==8.3.5
 sphinx==8.2.3
 sphinx_testing==1.0.1
