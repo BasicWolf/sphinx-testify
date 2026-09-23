@@ -1,7 +1,7 @@
 -r requirements.publish.txt
-flake8==7.4.0
+flake8==7.4.1
 mypy==2.3.1
 pytest==9.1.1
 sphinx==9.1.0
 sphinx_testing==1.0.1
-types-docutils==0.23.0.20260917
+types-docutils==0.23.0.20260923
