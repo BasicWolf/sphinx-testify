@@ -1,5 +1,5 @@
 -r requirements.publish.txt
-flake8==7.3.0
+flake8==7.4.0
 mypy==2.3.1
 pytest==9.1.1
 sphinx==9.1.0
