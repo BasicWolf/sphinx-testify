@@ -2,6 +2,6 @@
 flake8==7.4.1
 mypy==2.4.0
 pytest==9.1.1
-sphinx==9.1.1
+sphinx==9.2.0
 sphinx_testing==1.0.1
 types-docutils==0.23.0.20260923
